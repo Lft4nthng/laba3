@@ -1,15 +1,18 @@
 CC = gcc
 TARGET = program
-SOURCES = main.c arguments_parser.c
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = $(DIR_SRC)/main.c $(DIR_SRC)/arguments_parser.c
+OBJECTS = $(SOURCES:$(DIR_SRC)/%.c=$(DIR_BUILD)/%.o)
+DIR_BUILD = build
+DIR_SRC = src
+DIR_HEADER = include
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ 
+$(DIR_BUILD)/$(TARGET): $(OBJECTS)
+	$(CC) -o $@ $^ 
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I.\
+$(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
+	$(CC) -c $< -o $@ -I$(DIR_HEADER)
 
 clean:
-	rm -f $(OBJECTS) $(TARGET) 
+	rm -f $(OBJECTS) $(DIR_BUILD)/$(TARGET) 
 
 .PHONY: clean 
