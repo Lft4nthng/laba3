@@ -3,20 +3,26 @@
 typedef enum {
     PANEL,
     BRICK,
-    MONOLIT
+    MONOLIT,
+    NONE
 } BuildingType;
 
 typedef enum{True, False} Bool;
 
 typedef struct {
-    char builder[100];
-    char neighborhood[100];
+    char builder[128];
+    char neighborhood[128];
     BuildingType type;
-    int year;
+    unsigned short year;
     Bool elevator;
     Bool garbage_tunnel;
-    int flat_count;
-    int floors_count;
+    unsigned int flat_count;
+    unsigned short floors_count;
     double avg_area;
 
 } Building;
+
+
+void print_building(const Building* build);
+const char* build_to_str(BuildingType type);
+BuildingType str_to_build(const char* str);
