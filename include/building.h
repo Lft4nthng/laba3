@@ -1,13 +1,13 @@
 #pragma once
 
 typedef enum {
-    PANEL,
+    PANEL = 1,
     BRICK,
     MONOLIT,
-    NONE
+    NONE 
 } BuildingType;
 
-typedef enum{True, False} Bool;
+typedef enum{True = 1, False = 0} Bool;
 
 typedef struct {
     char builder[128];
@@ -16,10 +16,9 @@ typedef struct {
     unsigned short year;
     Bool elevator;
     Bool garbage_tunnel;
-    unsigned int flat_count;
+    unsigned short flat_count;
     unsigned short floors_count;
     double avg_area;
-
 } Building;
 
 

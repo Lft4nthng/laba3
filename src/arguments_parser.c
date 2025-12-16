@@ -16,14 +16,14 @@ static void print_help() {
 
 Arguments parse_args(int argc, char* argv[]) {
     Arguments args;
-    args.mode = NONE;
+    args.mode = MODE_NONE;
     args.sort = 1;
     args.generate_count = 0;
     args.input_file[0] = '\0';
     args.output_file[0] = '\0';
     args.error = 0;
 
-    if (argc == 1) {
+    if (argc == 1) { //нету аргументов
         print_help();
         args.error =  1;
         return args;
@@ -31,7 +31,7 @@ Arguments parse_args(int argc, char* argv[]) {
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--generate") == 0 || strcmp(argv[i], "-g") == 0) {
-            if (args.mode != NONE){
+            if (args.mode != MODE_NONE){
                 puts("Можно выбрать только один режим");
                 args.error = 1;
                 return args;
@@ -51,14 +51,14 @@ Arguments parse_args(int argc, char* argv[]) {
                 return args;
             }
         } else if (strcmp(argv[i], "--sort") == 0 || strcmp(argv[i], "-s") == 0) {
-            if (args.mode != NONE){
+            if (args.mode != MODE_NONE){
                 puts("Можно выбрать только один режим");
                 args.error = 1;
                 return args;
             }
             args.mode = MODE_SORT;
         } else if (strcmp(argv[i], "--print") == 0 || strcmp(argv[i], "-P") == 0) {
-            if (args.mode != NONE){
+            if (args.mode != MODE_NONE){
                 puts("Можно выбрать только один режим");
                 args.error = 1;
                 return args;
@@ -125,7 +125,7 @@ Arguments parse_args(int argc, char* argv[]) {
         }
     }
 
-    if (args.mode == NONE) {
+    if (args.mode == MODE_NONE) {
         puts("Ошибка: не указан режим работы");
         args.error = 1;
         return args;

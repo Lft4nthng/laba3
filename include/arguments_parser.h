@@ -6,7 +6,7 @@ typedef enum {
     MODE_GENERATE = 1,
     MODE_SORT,
     MODE_PRINT,
-    NONE = 0
+    MODE_NONE
 } ProgramMode;
 
 typedef struct {

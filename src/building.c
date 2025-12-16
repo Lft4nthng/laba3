@@ -21,7 +21,7 @@ BuildingType str_to_build(const char* str) {
 void print_building(const Building* build) {
     printf("Застройщик: %s\n", build->builder);
     printf("Микрорайон: %s\n", build->neighborhood);
-    printf("Тип: %s\n", building_type_to_str(build->type));
+    printf("Тип: %s\n", build_to_str(build->type));
     printf("Год постройки: %d\n", build->year);
     printf("Лифт: %s\n", build->elevator ? "YES" : "NO");
     printf("Мусоропровод: %s\n", build->garbage_tunnel ? "YES" : "NO");
