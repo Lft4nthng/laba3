@@ -1,10 +1,10 @@
 #pragma once
 
 typedef enum {
-    PANEL = 1,
-    BRICK,
-    MONOLIT,
-    NONE 
+    PANEL = 0,
+    BRICK = 1,
+    MONOLIT = 2,
+    NONE = 3
 } BuildingType;
 
 typedef enum{True = 1, False = 0} Bool;

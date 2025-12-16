@@ -1,5 +1,4 @@
 #include "sorter.h"
-#include "vector.h"
 #include <string.h>
 
 void selection_sort(Vector* v, Comparator cmp) {
