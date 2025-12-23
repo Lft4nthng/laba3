@@ -13,7 +13,10 @@
 int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "ru_RU.UTF-8");
     SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
+    SetConsoleCP(65001);  
+
+    Vector* v1 = NULL;
+    vector_init(v1);
 
     Arguments arg = parse_args(argc, argv);
 
