@@ -27,3 +27,19 @@ int cmp_by_year_desc(const Building* a, const Building* b) {
 int cmp_by_flat_count_asc(const Building* a, const Building* b) {
     return (int)a->flat_count - (int)b->flat_count;
 }
+int cmp_by_all_asc(const Building* a, const Building* b) {
+    if (a->year != b->year) return (int)a->year - (int)b->year;
+    
+    if (a->flat_count != b->flat_count) return (int)a->flat_count - (int)b->flat_count;
+    
+    return (int)a->floors_count - (int)b->floors_count;
+}
+
+
+int cmp_by_all_desc(const Building* a, const Building* b) {
+    if (a->year != b->year) return (int)b->year - (int)a->year;
+
+    if (a->flat_count != b->flat_count) return (int)b->flat_count - (int)a->flat_count;
+    
+    return (int)b->floors_count - (int)a->floors_count;
+}

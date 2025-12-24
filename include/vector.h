@@ -11,7 +11,7 @@ typedef struct {
 void vector_init(Vector* v);
 void vector_free(Vector* v);
 int vector_size(const Vector* v);
-Building* vector_get(const Vector* v, int index);
+Building* vector_get(const Vector* v, const int index);
 Building* vector_front(const Vector* v);
 Building* vector_back(const Vector* v);
 Building* vector_next(const Vector* v, const Building* current);

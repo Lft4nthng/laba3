@@ -7,4 +7,6 @@ void selection_sort(Vector* v, Comparator cmp);
 int cmp_by_year_asc(const Building* a, const Building* b);
 int cmp_by_year_desc(const Building* a, const Building* b);
 int cmp_by_flat_count_asc(const Building* a, const Building* b);
+int cmp_by_all_asc(const Building* a, const Building* b);
+int cmp_by_all_desc(const Building* a, const Building* b);
 

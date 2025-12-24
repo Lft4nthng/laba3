@@ -109,7 +109,7 @@ Building* vector_to_array(const Vector* v) {
     if(v == NULL) return NULL;
     Building* arr = malloc(v->size * sizeof(Building));
     if (arr) {
-        memcpy(arr, v->data, v->size * sizeof(Building));
+        memmove(arr, v->data, v->size * sizeof(Building));
     }
     return arr;
 }

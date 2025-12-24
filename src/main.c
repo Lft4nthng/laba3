@@ -73,10 +73,10 @@ int main(int argc, char* argv[]) {
             Comparator cmp = NULL;
             if (arg.sort == 1) {
                 printf("Сортировка по возрастанию года...\n");
-                cmp = cmp_by_year_asc;
+                cmp = cmp_by_all_asc;
             } else { 
                 printf("Сортировка по убыванию года...\n");
-                cmp = cmp_by_year_desc;
+                cmp = cmp_by_all_desc;
             }
 
             if (cmp == NULL) {

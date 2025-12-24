@@ -2,19 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 
+static const char** str = {"панельный", "кирпичный", "монолитный", "неизвестно"};
+
 const char* build_to_str(BuildingType type) {
-    switch (type) {
-        case PANEL: return "панельный";
-        case BRICK: return "кирпичный";
-        case MONOLIT: return "монолитный";
-        default: return "неизвестно";
-    }
+    return str[type];
 }
 
 BuildingType str_to_build(const char* str) {
-    if (strcmp(str, "панельный") == 0) return PANEL;
-    if (strcmp(str, "кирпичный") == 0) return BRICK;
-    if (strcmp(str, "монолитный") == 0) return MONOLIT;
+    for(int i = 0; i < 3; ++i) if (strcmp(str, str[i]) == 0) return (BuildingType)i;
     return NONE; 
 }
 
