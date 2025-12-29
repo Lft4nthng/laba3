@@ -43,29 +43,6 @@ void print_table(const Vector* v, FILE* out) {
 
     for (int i = 0; i < vector_size(v); i++) {
         Building* apt = vector_get(v, i);
-        fprintf(out, "%-20s %-15s %-12s %4d %3s %3s %5d %4d %8.2f\n", apt->builder, apt->neighborhood, build_to_str(apt->type), apt->year, apt->elevator ? "YES" : "NO", apt->garbage_tunnel ? "YES" : "NO", apt->flat_count,
-                apt->floors_count,
-                apt->avg_area);
-    }
-}
-
-void generate_data(Vector* v, int count) {
-    const char* developers[] = {"Ростстрой", "Главстрой", "Эталон", "ПИК", "Самолет"};
-    const char* districts[] = {"Новокосино", "Митино", "Ховрино", "Люберцы", "Бутово"};
-    srand(time(NULL));
-
-    for (int i = 0; i < count; i++) {
-        Building apt;
-        strcpy(apt.builder, developers[rand() % 5]);
-        strcpy(apt.neighborhood, districts[rand() % 5]);
-        apt.type = rand() % 3;
-        apt.year = 1985 + rand() % 40;
-        apt.elevator = rand() % 2;
-        apt.garbage_tunnel = rand() % 2;
-        apt.flat_count = 50 + rand() % 200;
-        apt.floors_count = 5 + rand() % 25;
-        apt.avg_area = 40 + (rand() % 700) / 10.0;
-
-        vector_push_back(v, &apt);
+        fprintf(out, "%-20s %-15s %-12s %4d %3s %3s %5d %4d %8.2f\n", apt->builder, apt->neighborhood, build_to_str(apt->type), apt->year, apt->elevator ? "YES" : "NO", apt->garbage_tunnel ? "YES" : "NO", apt->flat_count, apt->floors_count, apt->avg_area);
     }
 }

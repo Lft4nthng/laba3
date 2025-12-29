@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 
-static const char** str = {"панельный", "кирпичный", "монолитный", "неизвестно"};
+static const char* names[4] = {"панельный", "кирпичный", "монолитный", "неизвестно"};
 
 const char* build_to_str(BuildingType type) {
-    return str[type];
+    return names[type];
 }
 
 BuildingType str_to_build(const char* str) {
-    for(int i = 0; i < 3; ++i) if (strcmp(str, str[i]) == 0) return (BuildingType)i;
+    for(int i = 0; i < 3; ++i) if (strcmp(str, names[i]) == 0) return (BuildingType)i;
     return NONE; 
 }
 

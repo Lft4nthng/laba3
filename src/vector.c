@@ -23,7 +23,7 @@ int vector_size(const Vector* v) {
     return v->size;
 }
 
-Building* vector_get(const Vector* v, int index) {
+Building* vector_get(const Vector* v, unsigned index) {
     if (v == NULL || index < 0 || index >= v->size) return NULL;
     return &v->data[index];
 }
@@ -44,11 +44,11 @@ Building* vector_next(const Vector* v, const Building* current) {
 }
 
 Building* vector_prev(const Vector* v, const Building* current) {
-    if (v == NULL || current == NULL || current - v->data <= 0) return NULL;
+    if (v == NULL || current == NULL || current - v->data <= 1) return NULL;
     return current - 1;
 }
 
-static void resize(Vector* v, const int new_capacity) {
+static void resize(Vector* v, const unsigned new_capacity) {
     if(v == NULL) return;
     Building* new_data = realloc(v->data, new_capacity * sizeof(Building));
     if (new_data) {
@@ -61,17 +61,17 @@ static void resize(Vector* v, const int new_capacity) {
 void vector_push_back(Vector* v, const Building* build) {
     if(v == NULL) return;
     if (v->size >= v->capacity) {
-        int new_cap = (v->capacity == 0) ? INIT_CAPACITY : v->capacity * 2;
+        unsigned new_cap = (v->capacity == 0) ? INIT_CAPACITY : v->capacity * 2;
         resize(v, new_cap);
     }
     v->data[v->size++] = *build;
     return;
 }
 
-void vector_insert(Vector* v, const int index, const Building* build) {
+void vector_insert(Vector* v, const unsigned index, const Building* build) {
     if (v == NULL || index < 0 || index > v->size) return;
     if (v->size >= v->capacity) {
-        int new_cap = (v->capacity == 0) ? INIT_CAPACITY : v->capacity * 2;
+        unsigned new_cap = (v->capacity == 0) ? INIT_CAPACITY : v->capacity * 2;
         resize(v, new_cap);
     }
     memmove(&v->data[index + 1], &v->data[index], (v->size - index) * sizeof(Building));
@@ -79,13 +79,13 @@ void vector_insert(Vector* v, const int index, const Building* build) {
     v->size++;
 }
 
-void vector_erase(Vector* v, const int index) {
+void vector_erase(Vector* v, const unsigned index) {
     if (v == NULL || index < 0 || index >= v->size) return;
     memmove(&v->data[index], &v->data[index + 1], (v->size - index - 1) * sizeof(Building));
     v->size--;
 }
 
-void vector_swap(Vector* v, const int i, const int j) {
+void vector_swap(Vector* v, const unsigned i, const unsigned j) {
     if (v == NULL || i < 0 || i >= v->size || j < 0 || j >= v->size) return;
     Building temp = v->data[i];
     v->data[i] = v->data[j];
@@ -97,7 +97,7 @@ void vector_clear(Vector* v) {
     v->size = 0;
 }
 
-void vector_from_array(const Vector* v, const Building* arr, int n) {
+void vector_from_array(Vector* v, const Building* arr, unsigned n) {
     if(v == NULL) return;
     vector_clear(v);
     for (int i = 0; i < n; i++) {

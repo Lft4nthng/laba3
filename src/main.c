@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <windows.h>
 #include "arguments_parser.h"
+#include "generation.h"
 #include "vector.h"
 #include "building.h"
 #include "sorter.h"

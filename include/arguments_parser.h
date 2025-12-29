@@ -16,7 +16,8 @@ typedef struct {
     char input_file[FILE_LEN];
     char output_file[FILE_LEN];
     unsigned char error;
-} Arguments;
+} 
+Arguments;
 
 Arguments parse_args(int argc, char* argv[]);
 
