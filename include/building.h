@@ -1,5 +1,7 @@
 #pragma once
 
+#define NAME_LEN 128
+
 typedef enum {
     PANEL = 0,
     BRICK = 1,
@@ -10,8 +12,8 @@ typedef enum {
 typedef enum{True = 1, False = 0} Bool;
 
 typedef struct {
-    char builder[128];
-    char neighborhood[128];
+    char builder[NAME_LEN];
+    char neighborhood[NAME_LEN];
     BuildingType type;
     unsigned short year;
     Bool elevator;

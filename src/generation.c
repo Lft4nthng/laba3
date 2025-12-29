@@ -11,8 +11,8 @@ void generate_data(Vector* v, unsigned count) {
 
     for (int i = 0; i < count; i++) {
         Building apt;
-        strcpy(apt.builder, developers[rand() % 5]);
-        strcpy(apt.neighborhood, districts[rand() % 5]);
+        strncpy(apt.builder, developers[rand() % 5], NAME_LEN - 1);
+        strncpy(apt.neighborhood, districts[rand() % 5], NAME_LEN - 1);
         apt.type = rand() % 3;
         apt.year = 1985 + rand() % 40;
         apt.elevator = rand() % 2;
