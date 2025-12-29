@@ -16,6 +16,36 @@ void selection_sort(Vector* v, Comparator cmp) {
         }
     }
 }
+static int segmentation(Vector* v, Comparator cmp, int low, int high) {
+    void* pivot = vector_get(v, high);
+    int i = low - 1;
+    for (int j = low; j <= high - 1; ++j) {
+        if (cmp(vector_get(v, j), pivot) <= 0) {
+            ++i;
+            if (i != j) {
+                vector_swap(v, i, j);
+            }
+        }
+    }
+    if (i + 1 != high) {
+        vector_swap(v, i + 1, high);
+    }
+    return i + 1;
+}
+
+static void quick_sort_rec(Vector* v, Comparator cmp, int low, int high) {
+    if (low < high) {
+        int pivot_index = segmentation(v, cmp, low, high);
+        quick_sort_rec(v, cmp, low, pivot_index - 1);
+        quick_sort_rec(v, cmp, pivot_index + 1, high);
+    }
+}
+
+void quick_sort(Vector* v, Comparator cmp) {
+    int size = vector_size(v);
+    if (size <= 1) return;
+    quick_sort_rec(v, cmp, 0, size - 1);
+}
 
 int cmp_by_year_asc(const Building* a, const Building* b) {
     return (int)a->year - (int)b->year;
@@ -39,7 +69,7 @@ int cmp_by_all_asc(const Building* a, const Building* b) {
 
     if (a->type != b->type) return (int)(a->type - b->type);
 
-    if(a->elevator != b->elevator) return a->elevator - b->elevator;
+    if(a->elevator != b->elevator) return (int)(a->elevator - b->elevator);
 
     if(a->garbage_tunnel != b ->garbage_tunnel) return (int)(a->garbage_tunnel - b->garbage_tunnel);
 

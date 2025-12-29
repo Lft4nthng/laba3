@@ -95,32 +95,28 @@ Arguments parse_args(int argc, char* argv[]) {
                 args.error = 1;
                 return args;
             }
-            strncpy(args.output_file, argv[i] + 6, sizeof(args.output_file) - 1);
-            args.output_file[sizeof(args.output_file) - 1] = '\0';
+            strncpy(args.output_file, argv[i] + 6, sizeof(args.output_file));
         } else if (strcmp(argv[i], "-o") == 0) {
             if (i + 1 >= argc){
                 puts("Нет аргумента после -o");
                 args.error = 1;
                 return args;
             }
-            stnrcpy(args.output_file, argv[++i], sizeof(args.output_file) - 1);
-            args.output_file[sizeof(args.output_file) - 1] = '\0';
+            strncpy(args.output_file, argv[++i], sizeof(args.output_file));
         } else if (strncmp(argv[i], "--in=", 5) == 0) {
             if (*(argv[i] + 5) == '\0') {
                 puts("Ошибка: пустое имя файла после --im=");
                 args.error = 1;
                 return args;
             }
-            strncpy(args.input_file, argv[i] + 5, sizeof(args.input_file) - 1);
-            args.input_file[sizeof(args.input_file) - 1] = '\0';
+            strncpy(args.input_file, argv[i] + 5, sizeof(args.input_file));
         } else if (strcmp(argv[i], "-i") == 0) {
             if (i + 1 >= argc){
                 puts("Нет аргумента после -i");
                 args.error = 1;
                 return args;
             }
-            strncpy(args.input_file, argv[++i], sizeof(args.input_file) - 1);
-            args.input_file[sizeof(args.input_file) - 1] = '\0';
+            strncpy(args.input_file, argv[++i], sizeof(args.input_file));
         }
         else{
             printf("Unknown argument %s", argv[i]);

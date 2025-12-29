@@ -20,7 +20,7 @@ typedef struct {
     Bool garbage_tunnel;
     unsigned short flat_count;
     unsigned short floors_count;
-    double avg_area;
+    float avg_area;
 } Building;
 
 
