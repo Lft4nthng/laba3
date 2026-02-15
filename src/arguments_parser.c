@@ -38,12 +38,14 @@ Arguments parse_args(int argc, char* argv[]) {
             }
             args.mode = MODE_GENERATE;
             if (i + 1 < argc) {
-                args.generate_count = atoi(argv[++i]);
-                if(args.generate_count <= 0){
+                char* end_ptr;
+                int count = strtol(argv[++i], &end_ptr, 10);
+                if(*end_ptr != '\0' || args.generate_count <= 0){
                     puts("Число для генерации должно быть положителльным");
                     args.error = 1;
                     return args;
                 }
+                args.generate_count = count;
             }
             else{
                 puts("Необходимо ввести число для генерации");
@@ -96,6 +98,7 @@ Arguments parse_args(int argc, char* argv[]) {
                 return args;
             }
             strncpy(args.output_file, argv[i] + 6, sizeof(args.output_file));
+            args.output_file[sizeof(args.output_file) - 1] = '\0';
         } else if (strcmp(argv[i], "-o") == 0) {
             if (i + 1 >= argc){
                 puts("Нет аргумента после -o");
@@ -103,13 +106,15 @@ Arguments parse_args(int argc, char* argv[]) {
                 return args;
             }
             strncpy(args.output_file, argv[++i], sizeof(args.output_file));
+            args.output_file[sizeof(args.output_file) - 1] = '\0';
         } else if (strncmp(argv[i], "--in=", 5) == 0) {
             if (*(argv[i] + 5) == '\0') {
                 puts("Ошибка: пустое имя файла после --im=");
                 args.error = 1;
                 return args;
             }
-            strncpy(args.input_file, argv[i] + 5, sizeof(args.input_file));
+            strncpy(args.input_file, argv[i] + 5, sizeof(args.input_file) - 1);
+            args.input_file[sizeof(args.input_file) - 1] = '\0';
         } else if (strcmp(argv[i], "-i") == 0) {
             if (i + 1 >= argc){
                 puts("Нет аргумента после -i");
@@ -117,6 +122,7 @@ Arguments parse_args(int argc, char* argv[]) {
                 return args;
             }
             strncpy(args.input_file, argv[++i], sizeof(args.input_file));
+            args.input_file[sizeof(args.input_file) - 1] = '\0';
         }
         else{
             printf("Unknown argument %s", argv[i]);

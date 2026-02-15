@@ -16,9 +16,6 @@ int main(int argc, char* argv[]) {
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);  
 
-    Vector* v1 = NULL;
-    vector_init(v1);
-
     Arguments arg = parse_args(argc, argv);
 
     if(arg.error == 1){
@@ -36,8 +33,7 @@ int main(int argc, char* argv[]) {
             generate_data(&v, arg.generate_count);
             
             if (vector_size(&v) != arg.generate_count) {
-                fprintf(stderr, "Ошибка: сгенерировано %d записей вместо %d\n", 
-                        vector_size(&v), arg.generate_count);
+                fprintf(stderr, "Ошибка: сгенерировано %d записей вместо %d\n", vector_size(&v), arg.generate_count);
                 result = 1;
                 break;
             }

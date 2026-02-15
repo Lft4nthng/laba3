@@ -39,13 +39,19 @@ Building* vector_back(const Vector* v) {
 }
 
 Building* vector_next(const Vector* v, const Building* current) {
-    if (v == NULL ||current == NULL || current - v->data >= v->size - 1) return NULL;
-    return current + 1;
+    if (v == NULL || current == NULL || v->data == NULL) return NULL;
+    Building* base = (Building*)v->data;
+    Building* end = base + v->size;
+    if (current < base || current >= end - 1) return NULL;
+    return (Building*)(current + 1);
 }
 
 Building* vector_prev(const Vector* v, const Building* current) {
-    if (v == NULL || current == NULL || current - v->data <= 1) return NULL;
-    return current - 1;
+    if (v == NULL || current == NULL || v->data == NULL) return NULL;
+    Building* base = (Building*)v->data;
+    Building* end = base + v->size;
+    if (current <= base || current >= end) return NULL;
+    return (Building*)(current - 1);
 }
 
 static void resize(Vector* v, const unsigned new_capacity) {
@@ -61,7 +67,7 @@ static void resize(Vector* v, const unsigned new_capacity) {
 void vector_push_back(Vector* v, const Building* build) {
     if(v == NULL) return;
     if (v->size >= v->capacity) {
-        unsigned new_cap = (v->capacity == 0) ? INIT_CAPACITY : v->capacity * 2;
+        unsigned new_cap = (v->capacity == 0) ? INIT_CAPACITY : (unsigned)v->capacity * 1.5;
         resize(v, new_cap);
     }
     v->data[v->size++] = *build;
@@ -94,6 +100,7 @@ void vector_swap(Vector* v, const unsigned i, const unsigned j) {
 
 void vector_clear(Vector* v) {
     if(v == NULL) return;
+    free(v->data);
     v->size = 0;
 }
 
@@ -108,7 +115,7 @@ void vector_from_array(Vector* v, const Building* arr, unsigned n) {
 Building* vector_to_array(const Vector* v) {
     if(v == NULL) return NULL;
     Building* arr = malloc(v->size * sizeof(Building));
-    if (arr) {
+    if (arr != NULL) {
         memmove(arr, v->data, v->size * sizeof(Building));
     }
     return arr;

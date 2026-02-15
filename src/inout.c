@@ -3,11 +3,17 @@
 #include <string.h>
 #include <time.h>
 
-int read_csv(const char* filename, Vector* v) {
-    FILE* f = filename[0] ? fopen(filename, "r") : stdin;
-    if (!f) return 0;
+#define MAX_LINE_LEN 1024
 
-    char line[1024];
+int read_csv(const char* filename, Vector* v) {
+    if (v == NULL) return 0;
+    FILE* f = stdin;
+    if(filename && filename[0]){
+        f = fopen(filename, "r");
+    }
+    if (f == NULL) return 0;
+
+    char line[MAX_LINE_LEN];
     while (fgets(line, sizeof(line), f)) {
         Building apt = {0};
         char type_str[50];
@@ -25,8 +31,12 @@ int read_csv(const char* filename, Vector* v) {
 }
 
 int write_csv(const char* filename, const Vector* v) {
-    FILE* f = filename[0] ? fopen(filename, "w") : stdout;
-    if (!f) return 0;
+    if(v == NULL) return 0;
+    FILE* f = stdout;
+    if(filename && filename[0]){
+        f = fopen(filename, "w");
+    }
+    if (f == NULL) return 0;
 
     for (int i = 0; i < vector_size(v); i++) {
         Building* apt = vector_get(v, i);
@@ -38,6 +48,7 @@ int write_csv(const char* filename, const Vector* v) {
 }
 
 void print_table(const Vector* v, FILE* out) {
+    if (v == NULL || out == NULL) return;
     fprintf(out, "%-20s%-15s %-12s %4s %3s %3s %5s %4s %8s\n", "Застройщик |", "Микрорайон", "Тип", "Год", "ЛФ", "МП", "Кварт", "Эт", "Площадь");
     fprintf(out, "--------------------------------------------------------------------------------\n");
 

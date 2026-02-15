@@ -2,7 +2,12 @@
 #include <math.h>
 #include <string.h>
 
+#define EPS 0.01f
+
+typedef int(*arr_ptr)[10];
+
 void selection_sort(Vector* v, Comparator cmp) {
+    if(v == NULL) return;
     int n = vector_size(v);
     for (int i = 0; i < n - 1; i++) {
         int min_idx = i;
@@ -16,6 +21,7 @@ void selection_sort(Vector* v, Comparator cmp) {
         }
     }
 }
+
 static int segmentation(Vector* v, Comparator cmp, int low, int high) {
     void* pivot = vector_get(v, high);
     int i = low - 1;
@@ -42,26 +48,16 @@ static void quick_sort_rec(Vector* v, Comparator cmp, int low, int high) {
 }
 
 void quick_sort(Vector* v, Comparator cmp) {
+    if(v == NULL) return;
     int size = vector_size(v);
     if (size <= 1) return;
     quick_sort_rec(v, cmp, 0, size - 1);
 }
 
-int cmp_by_year_asc(const Building* a, const Building* b) {
-    return (int)a->year - (int)b->year;
-}
-
-int cmp_by_year_desc(const Building* a, const Building* b) {
-    return (int)b->year - (int)a->year;
-}
-
-int cmp_by_flat_count_asc(const Building* a, const Building* b) {
-    return (int)a->flat_count - (int)b->flat_count;
-}
 int cmp_by_all_asc(const Building* a, const Building* b) {
     if (a->year != b->year) return (int)a->year - (int)b->year;
 
-    if(fabs(a->avg_area - b->avg_area) > 0.009) return (a->avg_area > b->avg_area) ? 1 : -1;
+    if(fabs(a->avg_area - b->avg_area) >= EPS) return (a->avg_area > b->avg_area) ? 1 : -1;
 
     if (a->flat_count != b->flat_count) return (int)a->flat_count - (int)b->flat_count;
     
@@ -80,7 +76,7 @@ int cmp_by_all_asc(const Building* a, const Building* b) {
 int cmp_by_all_desc(const Building* a, const Building* b) {
     if (a->year != b->year) return (int)b->year - (int)a->year;
 
-    if(fabs(a->avg_area - b->avg_area) > 0.009) return (b->avg_area > a->avg_area) ? 1 : -1;
+    if(fabs(a->avg_area - b->avg_area) >= EPS) return (b->avg_area > a->avg_area) ? 1 : -1;
 
     if (a->flat_count != b->flat_count) return (int)b->flat_count - (int)a->flat_count;
     
